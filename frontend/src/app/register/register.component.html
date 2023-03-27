@@ -1,0 +1,95 @@
+
+<div class="container w-50 p-5 my-5 border border-dark border-2 rounded-3">
+    <form>
+        <div class="row mb-3 text-center">
+            <h2>Forma za registraciju</h2>
+            <hr>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <a routerLink="/login">Povratak na stranu za prijavu</a>
+            </div>
+        </div>
+        <div class="row mb-3 gy-3">
+            <div class="col-lg-6">
+                <input type="text" name="ime" class="form-control" placeholder="Ime..." [(ngModel)]="ime">
+            </div>
+            <div class="col-lg-6"> 
+                <input type="text" name="prezime" class="form-control" placeholder="Prezime..." [(ngModel)]="prezime">
+            </div>
+        </div>
+        <div class="row mb-3 mx-auto">
+            <input type="text" name="username" class="form-control" placeholder="Korisničko ime..." [(ngModel)]="username">
+        </div>
+        <div class="row mb-3 gy-3">
+            <div class="col-lg-6">
+                <input type="password" name="password" class="form-control" placeholder="Lozinka..." [(ngModel)]="password">
+            </div>
+            <div class="col-lg-6">
+                <input type="password" name="passwordAgain" class="form-control" placeholder="Potvrdite lozinku..." [(ngModel)]="passwordAgain">
+            </div>
+        </div>
+        <div class="row mb-3 mx-auto">
+            <input type="text" name="telefon" class="form-control" placeholder="Broj telefona..." [(ngModel)]="telefon">
+        </div>
+        <div class="row mb-3 mx-auto">
+            <input type="text" name="email" class="form-control" placeholder="Email adresa..." [(ngModel)]="email">
+        </div>
+        <div class="row mb-3 mx-auto">
+            <input type="text" name="ulicaBrojGrad" class="form-control" placeholder="Ulica, broj i grad..." [(ngModel)]="ulicaBrojGrad">
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col">
+                <label for="slikaUrl" class="btn btn-dark">slika</label>
+                <input id="slikaUrl" style="display:none" class="form-control" type="file" (change)="selectFile($event)" accept=".png, .jpg">
+            </div>
+        </div>
+        <div class="row mx-auto text-center">
+            <div class="col">
+                <button class="btn btn-outline-info" (click)="register()">Registrujte se</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container mb-3">
+    <div class="row">
+        <div class="col">            
+            <div class="alert alert-danger w-50 mx-auto text-center" [class.nodisplay]="porukaStatus!=0" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">            
+            <div class="alert alert-success w-50 mx-auto text-center" [class.nodisplay]="porukaStatus!=2" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

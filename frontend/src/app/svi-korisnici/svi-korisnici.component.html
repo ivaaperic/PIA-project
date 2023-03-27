@@ -1,0 +1,122 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/adminrequests">Zahtevi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sve-knjige">Sve knjige</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Registruj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/admindodajkorisnika">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/admindodajknjigu">Knjigu</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Azuriraj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/svi-korisnici">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/sve-knjige">Knjigu</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<div class="container p-3">
+    <router-outlet></router-outlet>
+</div>
+
+
+
+<div class="container">
+    <div class="row mb-3">
+      <div class="col">
+        <h3>Korisnici (ukupno {{broj}}):</h3>
+        <hr>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr class="text-center">
+              <th>Korisnicko ime</th>
+              <th>Ime</th>
+              <th>Prezime</th>
+              <th>Adresa</th>
+              <th>Email</th>
+              <th>Tip</th>
+              <th>Status</th>
+              <th>Slika</th>
+              <th>Akcija</th>
+              <th>Promeni tip</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr  class="text-center" *ngFor="let a of sviKorisnici" >
+              <td>{{a.username}}</td>
+
+              <td>{{a.ime}}</td>
+              <td>{{a.prezime}}</td>
+              <td>{{a.ulicaBrojGrad}}</td>
+              <td>{{a.email}}</td>
+              <td>{{a.tip}}</td>
+              <td>{{a.status}}</td> 
+              <td><img src="{{a.slikaUrl}}" width="40px"></td>
+              <td><button class="btn-sm btn-primary" (click)="azuriraj(a.username)" >Azuriraj</button></td>
+              <td><button class="btn-sm btn-primary" *ngIf="a.tip!='moderator'" [hidden]="a.tip=='admin'" (click)="promeniPrivilegiju(a.username)" >Unapredi</button>
+              <button class="btn-sm btn-primary" *ngIf="a.tip!='citalac'" [hidden]="a.tip=='admin'" (click)="promeniPrivilegiju(a.username)" >Degradiraj</button></td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+    </div>
+    
+</div>
+<div class="col">         
+    <div class="alert alert-success text-center" [class.nodisplay]="statusPoruka == 0" role="alert">
+        Uspesno ste promenili tip korisnika!
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

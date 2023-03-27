@@ -1,0 +1,230 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-primary" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/profil">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li>
+                  <a class="navbar-brand" href="/profil">
+                    <img src="{{korisnik.slikaUrl}}" alt="" width="30" height="40" class="d-inline-block align-text-top">
+                    Profil korisnika
+                  </a>
+               
+             
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="">Home</a>
+            </li>
+            
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              MENU
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/profil">Profil</a></li>
+                <li><a class="dropdown-item" href="/zahtevnovaknjiga">Zahtev za dodavanje nove knjige</a></li>
+                <li><a class="dropdown-item" href="/pretraga">Pretraga</a></li>
+                <li><a class="dropdown-item" href="/azuriraj">Azuriraj profil</a></li>
+                
+              
+            </ul>
+          </li>
+          
+        </ul>
+        <form class="d-flex">
+        
+          <input class="form-control me-2" type="search" placeholder="Pretrazi po nazivu.." aria-label="Search" name="naziv" [(ngModel)]="naziv">
+          <input class="form-control me-2" type="search" placeholder="Pretrazi po autorima.." aria-label="Search" name="autori" [(ngModel)]="autori">
+          <button class="btn btn-outline-success" (click)="pretrazi()" >Search</button>
+        </form>
+
+        <form class="d-flex">
+            <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+          </form>
+          
+
+      </div>
+    </div>
+  </nav>
+  <div class="container p-3">
+    <router-outlet></router-outlet>
+</div> <!--ovo mozda ne treba-->
+
+<div class="container w-50 p-5 my-5 border border-dark border-2 rounded-3">
+    <form>
+        <div class="row mb-3 text-center">
+            <h2>Napredna pretraga</h2>
+            <hr>
+        </div>
+        <div class="row mb-3 gy-3">
+            <h5>Pretraga po nazivu:</h5>
+
+            <div class="col-lg-6"> 
+                <input type="text" name="naziv" class="form-control" placeholder="Naziv..." [(ngModel)]="naziv">
+            </div>
+        </div>
+        <div class="row mb-3 gy-3">
+            <h5>Pretraga po autorima:</h5>
+
+            <div class="col-lg-6"> 
+                <input type="text" name="autori" class="form-control" placeholder="Autori..." [(ngModel)]="autori">
+            </div>
+        </div>
+
+        
+        <h5>Pretraga po zanru/zanrovima:</h5>
+        <div>
+            <select class="form-select" multiple aria-label="multiple select example" name="zanrovi"  [(ngModel)]="zanrovi">
+                <option *ngFor="let n of sviZanrovi">{{n.zanr}}</option>
+          </select>
+
+
+        </div>
+        
+
+        
+        <div class="row">
+            <h5>Datum od</h5>
+            
+            <div class="col-4">
+              <input type="number" name="godinaOd" class="form-control" placeholder="Godina od" [(ngModel)]="godinaOd">
+            </div>
+        </div>
+        <div class="row">
+            <h5>Datum do</h5>
+            
+            <div class="col-4">
+              <input type="number" name="godinaDo" class="form-control" placeholder="Godina do" [(ngModel)]="godinaDo">
+            </div>
+        </div>
+        
+        <h5>Izdavac</h5>
+        <div class="row mb-3 mx-auto">
+            
+            <input type="text" name="izdavac" class="form-control" placeholder="Izdavac..." [(ngModel)]="izdavac">
+        </div>
+        <hr>
+        <div>
+            <div class="row mx-auto left">
+                
+            
+                <div class="col">
+                    <button class="btn btn-outline-danger" (click)="obrisiPretragu()">Obrisi pretragu</button>
+                </div>
+
+                <div class="col">
+                    <button class="btn btn-outline-info" (click)="prikaziSveKnjige()">Prikazi sve</button>
+                </div>
+
+                <div class="col">
+                    <button class="btn btn-dark" (click)="pretrazi()">Pretrazi</button>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+
+        
+    </form>
+</div>
+<div class="container mb-3">
+    <div class="row">
+        <div class="col">             
+            <div class="alert alert-danger w-50 mx-auto text-center" [class.nodisplay]="porukaStatus!=0" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">            
+            <div class="alert alert-success w-50 mx-auto text-center" [class.nodisplay]="porukaStatus!=2" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" >
+    <div class="row mb-3">
+      <div class="col">
+        <h3>Rezultati pretrage:</h3>
+        <hr>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr class="text-center">
+              <th>ID</th>
+              <th>Naziv</th>
+              <th>Sličica</th>
+              <th>Autori</th>
+              <th>Zanrovi</th>
+              <th>Izdavac</th>
+              <th>Godina izdavanja</th>
+              <th>Jezik</th>
+              <th>Broj uzimanja</th>
+              <th>Poseti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  class="text-center" *ngFor="let a of filtrirane" >
+              <td>{{a.id}}</td>
+              <td>{{a.naziv}}</td>
+              <td><img src="{{a.slikaKorice}}" width="40px" alt=""></td>
+              <td>{{a.autori}}</td>
+              <td>{{a.zanrovi}}</td>
+              <td>{{a.izdavac}}</td>
+              <td>{{a.godinaIzdavanja}}</td>
+              <td>{{a.jezik}}</td> 
+              <td>{{a.brojUzimanja}}</td>
+              <td><button class="btn-sm btn-outline-info" (click)="detalji(a.id)"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">Pregled</button></td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+    </div>
+    
+</div>
+
+<div class="row">
+    <div class="col">            
+        <div class="alert alert-warning w-50 mx-auto text-center" [class.nodisplay]="filtrirane.length!=0" role="alert">
+            Ne postoji takva knjiga.
+        </div>
+    </div>
+</div>
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

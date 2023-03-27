@@ -1,0 +1,138 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-primary" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/profil">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li>
+                  <a class="navbar-brand" href="/profil">
+                    <img src="{{korisnik.slikaUrl}}" alt="" width="30" height="40" class="d-inline-block align-text-top">
+                    Profil korisnika
+                  </a>
+               
+             
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="">Home</a>
+            </li>
+            
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              MENU
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/citalac">Pocetna strana</a></li>
+                <li><a class="dropdown-item" href="/profil">Profil</a></li>
+                <li><a class="dropdown-item" href="/zahtevnovaknjiga">Zahtev za dodavanje nove knjige</a></li>
+                <li><a class="dropdown-item" href="/zaduzene-knjige">Pregled zaduzenih knjiga</a></li>
+                <li><a class="dropdown-item" href="/istorija">Istorija zaduzenja</a></li>
+                <li><a class="dropdown-item" href="/pretraga">Pretraga</a></li>
+                <li><a class="dropdown-item" href="/promenalozinke">Promena lozinke</a></li>
+                <li><a class="dropdown-item" href="/azuriraj">Azuriraj profil</a></li>
+              
+            </ul>
+          </li>
+          
+        </ul>
+        
+
+        <form class="d-flex">
+            <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+          </form>
+          
+
+      </div>
+    </div>
+  </nav>
+  <div class="container p-3">
+    <router-outlet></router-outlet>
+</div> <!--ovo mozda ne treba-->
+
+
+<h5 style="color:chocolate">Pregled istorije zaduživanja knjiga</h5>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-primary" >
+    <div class="container-fluid">
+        
+<li class="nav-item dropdown">
+    <a class= " navbar-brand nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Sortiraj
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><button class="dropdown-item" (click)="sortirajPoDatumuUzimanja()" >Datumu uzimanja</button></li>
+        <li><button class="dropdown-item" (click)="sortirajPoDatumuVracanja()">Datumu vracanja</button></li>
+        <li><button class="dropdown-item" (click)="sortirajPoNazivuKnjige()">Nazivu</button></li>
+        <li><button class="dropdown-item" (click)="sortirajPoAutoruKnjige()">Autoru</button></li>
+        
+        
+      
+    </ul>
+</li>
+</div>
+
+
+</nav>
+
+<div class="container p-5" *ngIf="mojaIstorija.length>0">
+    <div class="row">
+      <div class="col">
+        <div class="row mb-3 gy-3">
+          <div class="col-9">
+            <table class="table">
+              <thead>
+                <tr class="text-center">
+                  <th>Naziv knjige</th>
+                  <th>Autori</th>
+                  <th>Datum zaduzivanja</th>
+                  <th>Datum razduživanja</th>
+                  <th>Detalji</th>
+                  <!--<th *ngIf="this.korisnik.blokiran==false">Detaljnije o knjizi</th>-->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center" *ngFor="let k of mojaIstorija">
+                  <td>{{k.nazivKnjige}}</td>
+                  <td>{{k.autoriKnjige}}</td>
+                  <td>{{k.datumUzimanjaString}}</td>
+                  <td>{{k.datumVracanjaString}}</td>
+                  <td><button class="btn btn-primary" (click)="pregled(k.idKnjige)">Pregled</button></td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+        
+        
+      </div>
+    </div>    
+
+<div *ngIf="mojaIstorija.length==0">Do sada niste zadužili nijednu knjigu. </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

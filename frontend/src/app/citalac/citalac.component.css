@@ -1,0 +1,11 @@
+table, tr, td, th{
+    border: 1px solid;
+}
+
+.nodisplay {
+    display: none;
+}
+
+h2{
+    color:darkcyan
+}

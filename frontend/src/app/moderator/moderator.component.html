@@ -1,0 +1,165 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-primary" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/profil">{{korisnik.ime}} {{korisnik.prezime}}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li>
+                  <a class="navbar-brand" href="/profil">
+                    <img src="{{korisnik.slikaUrl}}" alt="" width="30" height="40" class="d-inline-block align-text-top">
+                    Profil korisnika
+                  </a>
+              
+            
+            </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="">Home</a>
+          </li>
+            
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            MENU
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/moderator">Pocetna strana</a></li>
+              <li><a class="dropdown-item" href="/profil">Profil</a></li>
+              <li><a class="dropdown-item" href="/zahtevimoderator">Zahtevi za dodavanje knjige</a></li>
+              <li><a class="dropdown-item" href="/zahtevnovaknjiga">Dodavanje nove knjige</a></li>
+              <li><a class="dropdown-item" href="/pretraga">Pretraga</a></li>
+              <li><a class="dropdown-item" href="/azuriraj">Azuriraj profil</a></li>
+              
+            
+          </ul>
+        </li>
+        
+      </ul>
+      <form class="d-flex">
+      
+        <input class="form-control me-2" type="search" placeholder="Pretrazi po nazivu.." aria-label="Search" name="naziv" [(ngModel)]="naziv">
+        <input class="form-control me-2" type="search" placeholder="Pretrazi po autorima.." aria-label="Search" name="autori" [(ngModel)]="autori">
+        <button class="btn btn-outline-success" (click)="pretrazi()" >Search</button>
+      </form>
+
+      <form class="d-flex">
+          <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+        </form>
+        
+
+    </div>
+  </div>
+</nav>
+<div class="container p-3">
+  <router-outlet></router-outlet>
+</div> <!--ovo mozda ne treba-->
+
+<h2>Knjiga dana:</h2>
+<br>
+<table>
+  <tr>
+    <th>Slika korice</th>    <br>
+
+    <th>Naziv knjige</th><br>
+    
+    <th>Autori</th><br>
+    
+    <th>Prosecna ocena</th><br>
+  </tr>
+  <tr>
+    <td><img [src]="knjigaDana.slikaKorice"  height="100px"  width="70px"></td><br>
+    <td>{{knjigaDana.naziv}}</td><br>
+    <td>{{knjigaDana.autori}}</td><br>
+    <td>{{prosecnaOcenaString}}</td><br>
+
+
+</tr>
+
+</table>
+<hr>
+
+
+<div class="container" [hidden]="filtrirane.length==0">
+  <div class="row mb-3">
+    <div class="col">
+      <h2>Rezultati pretrage:</h2>
+      <hr>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr class="text-center">
+            <th>ID</th>
+            <th>Naziv</th>
+            <th>Sličica</th>
+            <th>Autori</th>
+            <th>Zanrovi</th>
+            <th>Izdavac</th>
+            <th>Godina izdavanja</th>
+            <th>Jezik</th>
+            <th>Broj uzimanja</th>
+            <th>Poseti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  class="text-center" *ngFor="let a of filtrirane" >
+            <td>{{a.id}}</td>
+            <td>{{a.naziv}}</td>
+            <td><img src="{{a.slikaKorice}}" width="40px" alt=""></td>
+            <td>{{a.autori}}</td>
+            <td>{{a.zanrovi}}</td>
+            <td>{{a.izdavac}}</td>
+            <td>{{a.godinaIzdavanja}}</td>
+            <td>{{a.jezik}}</td> 
+            <td>{{a.brojUzimanja}}</td>
+            <td><button class="btn-sm btn-outline-info" (click)="izaberi(a.id)"
+              data-bs-toggle="modal" data-bs-target="#exampleModal">Pregled</button></td>
+          </tr>
+        </tbody>
+        
+      </table>
+    </div>
+  </div>
+  
+</div>
+
+{{message}}
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

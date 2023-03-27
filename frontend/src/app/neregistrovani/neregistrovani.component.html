@@ -1,0 +1,134 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-primary" >
+    <div class="container-fluid">
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="login">LOGIN</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="register">REGISTER</a>
+            </li>
+            
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              MENU
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/neregistrovani">Pocetna strana</a></li>
+                
+                
+              
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+        
+          <input class="form-control me-2" type="search" placeholder="Pretrazi po nazivu.." aria-label="Search" name="naziv" [(ngModel)]="naziv">
+          <input class="form-control me-2" type="search" placeholder="Pretrazi po autorima.." aria-label="Search" name="autori" [(ngModel)]="autori">
+          <button class="btn btn-outline-success" (click)="pretrazi()" >Search</button>
+        </form>
+
+        
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" [hidden]="filtrirane.length==0">
+    <div class="row mb-3">
+      <div class="col">
+        <h1>Rezultati pretrage:</h1>
+        <hr>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr class="text-center">
+              <th>ID</th>
+              <th>Naziv</th>
+              <th>Sličica</th>
+              <th>Autori</th>
+              <th>Zanrovi</th>
+              <th>Izdavac</th>
+              <th>Godina izdavanja</th>
+              <th>Jezik</th>
+              <th>Broj uzimanja</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  class="text-center" *ngFor="let a of filtrirane" >
+              <td>{{a.id}}</td>
+              <td>{{a.naziv}}</td>
+              <td><img src="{{a.slikaKorice}}" width="40px" alt=""></td>
+              <td>{{a.autori}}</td>
+              <td>{{a.zanrovi}}</td>
+              <td>{{a.izdavac}}</td>
+              <td>{{a.godinaIzdavanja}}</td>
+              <td>{{a.jezik}}</td> 
+              <td>{{a.brojUzimanja}}</td>
+              
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+    </div>
+    
+</div>
+
+
+  <hr>
+  <h1>Pocetna strana!</h1> 
+
+
+
+  <hr>
+  <h2 style="background-color: darkcyan;">3 najcitanije knjige: </h2>
+
+  <ngb-carousel *ngIf="sveKnjige.length>2" style="width: 570px; height: 500px; padding-left: 16px; padding-right: 16px" >
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="knjiga1.slikaKorice" alt="1. najcitanija" width="580px" height="600px">
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="knjiga2.slikaKorice" alt="2. najcitanija" width="580px" height="600px">
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="knjiga3.slikaKorice" alt="3. najcitanija" width="580x" height="600px">
+      </div>
+    </ng-template>
+  </ngb-carousel>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

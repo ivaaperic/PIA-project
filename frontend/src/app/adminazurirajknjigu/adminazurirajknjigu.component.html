@@ -1,0 +1,283 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/adminrequests">Zahtevi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sve-knjige">Sve knjige</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/adminpromenalozinke">Promeni lozinku</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Registruj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/admindodajkorisnika">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/admindodajknjigu">Knjigu</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Azuriraj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/svi-korisnici">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/sve-knjige">Knjigu</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<div class="container p-3">
+    <router-outlet></router-outlet>
+</div>
+
+
+<div class="card">
+    <img src="{{knjiga.slikaKorice}}"  width="300px" height="480px" alt="{{knjiga.id}}" class="image">
+  
+    <div class="card-body">
+      <h3 class="card-title">{{knjiga.naziv}}</h3>
+      <i class="card-title">{{knjiga.autori}}</i>
+      <p class="card-text">Identifikator: {{knjiga.id}}</p>
+      <p class="card-text">Zanr/ovi: {{knjiga.zanrovi}}</p>
+      <p class="card-text">Izdavac: {{knjiga.izdavac}}</p>
+      <p class="card-text">Godina izdavanja: {{knjiga.godinaIzdavanja}}</p>
+      <p class="card-text">Jezik: {{knjiga.jezik}}</p>
+      <p class="card-text">Na stanju: {{knjiga.naStanju}}</p>
+      <p class="card-text">Prosecna ocena: {{this.prosecnaOcena}}</p>
+      <!--<button type="button" class="btn btn-outline-info" (click)="nazad()">Nazad</button>-->
+    </div>
+    <br>
+  </div>
+
+
+  
+
+
+  <div *ngIf="this.korisnik.tip=='moderator' || this.korisnik.tip=='admin'" class="container">
+    <div class="row mb-3 mt-3"><h5 class="tabele" style="color:chocolate">Ažuriraj knjigu</h5> <hr></div>
+    <br>
+    <form>
+    <div>
+        <table class="tabelaIzmena">
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>naziv</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" class="form-control" id="in" name="izmenaNaziv" [(ngModel)]="izmenaNaziv">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="nazivBoolean" [(ngModel)]="izmenaNazivBoolean" value="da" id="nazivDa">
+                    <label for="nazivDa">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="nazivBoolean" [(ngModel)]="izmenaNazivBoolean" value="ne" id="nazivNe">
+                    <label for="nazivNe">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>autor</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" class="form-control" id="ina" name="izmenaAutor" [(ngModel)]="izmenaAutor">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="autorBoolean" [(ngModel)]="izmenaAutorBoolean" value="da" id="nazivDaA">
+                    <label for="nazivDaA">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="autorBoolean" [(ngModel)]="izmenaAutorBoolean" value="ne" id="nazivNeA">
+                    <label for="nazivNeA">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>žanr</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" class="form-control" id="iz" name="izmenaZanr" [(ngModel)]="izmenaZanr">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="zanrBoolean" [(ngModel)]="izmenaZanrBoolean" value="da" id="nazivDaZ">
+                    <label for="nazivDaZ">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="zanrBoolean" [(ngModel)]="izmenaZanrBoolean" value="ne" id="nazivNeZ">
+                    <label for="nazivNeZ">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>izdavač</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" name="izmenaIzdavac" id="ii" class="form-control" [(ngModel)]="izmenaIzdavac">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="izdavacBoolean" [(ngModel)]="izmenaIzdavacBoolean" value="da"
+                        id="nazivDaI">
+                    <label for="nazivDaI">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="izdavacBoolean" [(ngModel)]="izmenaIzdavacBoolean" value="ne"
+                        id="nazivNeI">
+                    <label for="nazivNeI">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>godina izdanja</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" class="form-control" id="ig" name="izmenaGodinaIzdanja" [(ngModel)]="izmenaGodinaIzdanja">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="godinaIzdanjaBoolean" [(ngModel)]="izmenaGodinaIzdanjaBoolean" value="da"
+                        id="nazivDaGI">
+                    <label for="nazivDaGI">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="godinaIzdanjaBoolean" [(ngModel)]="izmenaGodinaIzdanjaBoolean" value="ne"
+                        id="nazivNeGI">
+                    <label for="nazivNeGI">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>jezik</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text"  class="form-control" id="ij" name="izmenaJezik" [(ngModel)]="izmenaJezik">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="jezikBoolean" [(ngModel)]="izmenaJezikBoolean" value="da" id="nazivDaJ">
+                    <label for="nazivDaJ">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="jezikBoolean" [(ngModel)]="izmenaJezikBoolean" value="ne" id="nazivNeJ">
+                    <label for="nazivNeJ">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>na stanju</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" name="izmenaNaStanju" id="ins" class="form-control" [(ngModel)]="izmenaNaStanju">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="naStanjuBoolean" [(ngModel)]="izmenaNaStanjuBoolean" value="da"
+                        id="nazivDaNS">
+                    <label for="nazivDaNS">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="naStanjuBoolean" [(ngModel)]="izmenaNaStanjuBoolean" value="ne"
+                        id="nazivNeNS">
+                    <label for="nazivNeNS">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>slika</span>
+                </td>
+                <td class="tabelaIzmena">
+                  <div class="col">
+                    <label for="izmenaSlike" class="btn btn-primary">Izaberi sliku</label>
+                    <input id="izmenaSlike" style="display:none" class="form-control" type="file" (change)="selectFile($event)" accept=".png, .jpg">
+                </div>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="slikaBoolean"  [(ngModel)]="izmenaSlikaBoolean" value="da" id="nazivDaS">
+                    <label for="nazivDaS">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="slikaBoolean" [(ngModel)]="izmenaSlikaBoolean" value="ne" id="nazivNeS">
+                    <label for="nazivNeS">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <div><img [src]="izmenaSlika" *ngIf="izmenaSlika" width="90" height="120"></div>
+                <td>
+                  <i>Trenutno izabrana slika (ili vec postojeca)</i>
+                </td>
+            </tr>
+
+        </table>
+        <hr>
+        <button (click)="azurirajKnjigu()" type="submit" class="btn btn-outline-info">Ažuriraj</button>
+        <br>
+        <span>{{porukaIzmena}}</span>
+        <br>
+        <br>
+        <button class="btn btn-outline-info" type="submit" (click)="azurirajStranicu()">Ažuriraj stranicu</button>
+        <br>
+        <br>
+
+    </div>
+  </form>
+
+  <div class="col">
+    <h3>Brisanje knjige: </h3>
+    <hr>
+</div>
+
+<div class="col-lg-4">
+    <div class="row">
+        <div class="col">
+            <br>
+        <button class="btn btn-dark" (click)="obrisiKnjigu()">Obrisi knjigu</button>
+        </div>
+        <div class="col">
+            <div class="alert alert-success text-center" [class.nodisplay]="statusPorukaObrisi != 2" role="alert">
+                {{porukaObrisi}}
+            </div>
+            <div class="alert alert-warning text-center" [class.nodisplay]="statusPorukaObrisi != 1" role="alert">
+                {{porukaObrisi}}
+            </div>
+            <div class="alert alert-danger text-center" [class.nodisplay]="statusPorukaObrisi != 0" role="alert">
+                {{porukaObrisi}}
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

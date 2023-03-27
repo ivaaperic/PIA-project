@@ -1,0 +1,21 @@
+
+th, td {
+    border: 1px solid;
+}
+
+table{
+    border: 1px solid;
+    width: 100%;
+}
+
+h1{
+    color:darkcyan
+}
+
+.nodisplay {
+    display:none;
+} 
+
+
+
+

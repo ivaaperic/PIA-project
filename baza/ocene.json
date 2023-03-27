@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "632a2dd7f24bc21c5359a6f8"
+  },
+  "ocena": "8",
+  "username": "mikaa",
+  "idKnjige": 2,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a2e28f24bc21c5359a70b"
+  },
+  "ocena": "9",
+  "username": "janko",
+  "idKnjige": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a2e83f24bc21c5359a71a"
+  },
+  "ocena": "6",
+  "username": "janko",
+  "idKnjige": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a3f0df24bc21c5359a9e7"
+  },
+  "ocena": "10",
+  "username": "tjofil",
+  "idKnjige": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a4023f24bc21c5359aa40"
+  },
+  "ocena": "8",
+  "username": "ljubicica",
+  "idKnjige": 8,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a4037f24bc21c5359aa52"
+  },
+  "ocena": "10",
+  "username": "ljubicica",
+  "idKnjige": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a4067f24bc21c5359aa6f"
+  },
+  "ocena": "5",
+  "username": "ljubicica",
+  "idKnjige": 5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632b196dfe09da2eb0e7dee3"
+  },
+  "ocena": "10",
+  "username": "janko",
+  "idKnjige": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632b1c93fe09da2eb0e7dfb8"
+  },
+  "ocena": "6",
+  "username": "tjofil",
+  "idKnjige": 2,
+  "__v": 0
+}]

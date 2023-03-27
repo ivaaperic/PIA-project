@@ -1,0 +1,129 @@
+[{
+  "_id": {
+    "$oid": "632a2e28f24bc21c5359a710"
+  },
+  "idKnjige": 4,
+  "tekst": "Dobra",
+  "username": "janko",
+  "datum": {
+    "$date": {
+      "$numberLong": "1663708712915"
+    }
+  },
+  "azurirano": true,
+  "datumAzuriranja": {
+    "$date": {
+      "$numberLong": "1663708827864"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a3f0df24bc21c5359a9ec"
+  },
+  "idKnjige": 1,
+  "tekst": "Odlicna!",
+  "username": "tjofil",
+  "datum": {
+    "$date": {
+      "$numberLong": "1663713037826"
+    }
+  },
+  "azurirano": false,
+  "datumAzuriranja": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a4023f24bc21c5359aa45"
+  },
+  "idKnjige": 8,
+  "tekst": "Blabla",
+  "username": "ljubicica",
+  "datum": {
+    "$date": {
+      "$numberLong": "1663713315501"
+    }
+  },
+  "azurirano": false,
+  "datumAzuriranja": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632a4037f24bc21c5359aa57"
+  },
+  "idKnjige": 1,
+  "tekst": "Top",
+  "username": "ljubicica",
+  "datum": {
+    "$date": {
+      "$numberLong": "1663713335467"
+    }
+  },
+  "azurirano": false,
+  "datumAzuriranja": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632afafa971ac24e051a64ee"
+  },
+  "idKnjige": 2,
+  "tekst": "Onako",
+  "username": "ljubicica",
+  "datum": {
+    "$date": {
+      "$numberLong": "1663761146504"
+    }
+  },
+  "azurirano": false,
+  "datumAzuriranja": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632afc69971ac24e051a6581"
+  },
+  "idKnjige": 3,
+  "tekst": "Okej",
+  "username": "tjofil",
+  "datum": {
+    "$date": {
+      "$numberLong": "1663761513887"
+    }
+  },
+  "azurirano": false,
+  "datumAzuriranja": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632b196dfe09da2eb0e7dee5"
+  },
+  "idKnjige": 3,
+  "tekst": "Dobra!",
+  "username": "janko",
+  "datum": {
+    "$date": {
+      "$numberLong": "1663768941844"
+    }
+  },
+  "azurirano": true,
+  "datumAzuriranja": {
+    "$date": {
+      "$numberLong": "1663768953421"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632b1c93fe09da2eb0e7dfba"
+  },
+  "idKnjige": 2,
+  "tekst": "Nista specijalno",
+  "username": "tjofil",
+  "datum": {
+    "$date": {
+      "$numberLong": "1663769747158"
+    }
+  },
+  "azurirano": false,
+  "datumAzuriranja": null,
+  "__v": 0
+}]

@@ -1,0 +1,199 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/adminrequests">Zahtevi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sve-knjige">Sve knjige</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/adminpromenalozinke">Promeni lozinku</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Registruj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/admindodajkorisnika">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/admindodajknjigu">Knjigu</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Azuriraj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/svi-korisnici">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/sve-knjige">Knjigu</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<div class="container p-3">
+    <router-outlet></router-outlet>
+</div>
+
+
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col">
+            <h3>Zahtevi</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row mb-3" *ngIf="requests.length>0">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th>Korisnicko ime</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Telefon</th>
+                    <th>Mejl</th>
+                    <th>Slika</th>
+                    <th>Akcija </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let r of requests" class="text-center">
+                    <td>{{r.username}}</td>
+                    <td>{{r.ime}}</td>
+                    <td>{{r.prezime}}</td>
+                    <td>{{r.telefon}}</td>
+                    <td>{{r.email}}</td>
+                    <td><img [src]="r.slikaUrl"  height="70px"  width="50px"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-2">
+                                <button class="btn-sm btn-success" (click)="updateStatus('aktivan', r.username)">✓</button>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn-sm btn-danger" (click)="updateStatus('neaktivan', r.username)">X</button>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <h3>Neaktivni nalozi</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th>Korisnicko ime</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Telefon</th>
+                    <th>Mejl</th>
+                    <th>Slika</th>
+                    <th>Akcija </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="text-center" *ngFor="let d of deactivated">
+                    <td>{{d.username}}</td>
+                    <td>{{d.ime}}</td>
+                    <td>{{d.prezime}}</td>
+                    <td>{{d.telefon}}</td>
+                    <td>{{d.email}}</td>
+                    <td><img [src]="d.slikaUrl"  height="70px"  width="50px"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-2">
+                                <button class="btn-sm btn-success" (click)="updateStatus('aktivan', d.username)">Aktiviraj</button>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col">
+            <h3>Aktivni nalozi</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th>Korisnicko ime</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Telefon</th>
+                    <th>Mejl</th>
+                    <th>Slika</th>
+                    <th>Akcija </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let a of active" class="text-center">
+                    <td>{{a.username}}</td>
+                    <td>{{a.ime}}</td>
+                    <td>{{a.prezime}}</td>
+                    <td>{{a.telefon}}</td>
+                    <td>{{a.email}}</td>
+                    <td><img [src]="a.slikaUrl"  height="70px"  width="50px"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-2">
+                                <button class="btn-sm btn-danger" (click)="updateStatus('neaktivan', a.username)">Deaktiviraj</button>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

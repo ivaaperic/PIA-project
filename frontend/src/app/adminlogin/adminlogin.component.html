@@ -1,0 +1,62 @@
+<div class="container w-50 p-5 mb-3 mx-auto mt-5 border border-2 border-dark rounded-3">
+    <form>
+        <div class="row mb-3 text-center">
+            <h2>Forma za prijavu na sistem</h2>
+            <hr>
+        </div>
+        <div class="row mb-3 gy-3">
+            <div class="col">
+                <input type="text" class="form-control" name="username" id="u" placeholder="Korisničko ime..." [(ngModel)]="username" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">   
+                <input type="password" class="form-control" name="password" id="p" placeholder="Lozinka..." [(ngModel)]="password" required="true">
+            </div>
+        </div>
+        
+        <div class="row mb-3 mx-auto text-center">
+            <div class="col">
+                <button class="btn btn-primary" (click)="login()">Prijavite se</button>
+            </div>
+        </div>
+        
+        
+
+    </form>
+      
+</div>
+<div class="container mb-3">
+    <div class="row">
+        <div class="col">            
+            <div class="alert alert-danger w-50 mx-auto text-center" [class.nodisplay]="message=='nista'" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

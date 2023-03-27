@@ -1,0 +1,116 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/adminrequests">Zahtevi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sve-knjige">Sve knjige</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Registruj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/admindodajkorisnika">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/admindodajknjigu">Knjigu</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Azuriraj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/svi-korisnici">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/sve-knjige">Knjigu</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<div class="container p-3">
+    <router-outlet></router-outlet>
+</div>
+
+
+
+<div class="container">
+    <div class="row mb-3">
+      <div class="col">
+        <h3>Knjige (ukupno {{broj}}):</h3>
+        <hr>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr class="text-center">
+              <th>ID</th>
+              <th>Naziv</th>
+              <th>Sličica</th>
+              <th>Autori</th>
+              <th>Zanrovi</th>
+              <th>Izdavac</th>
+              <th>Godina izdavanja</th>
+              <th>Jezik</th>
+              <th>Broj uzimanja</th>
+              <th>Poseti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  class="text-center" *ngFor="let a of sveKnjige">
+              <td>{{a.id}}</td>
+              <td>{{a.naziv}}</td>
+              <td><img src="{{a.slikaKorice}}" width="40px" alt=""></td>
+              <td>{{a.autori}}</td>
+              <td>{{a.zanrovi}}</td>
+              <td>{{a.izdavac}}</td>
+              <td>{{a.godinaIzdavanja}}</td>
+              <td>{{a.jezik}}</td> 
+              <td>{{a.brojUzimanja}}</td>
+              <td><button class="btn-sm btn-primary" (click)="detalji(a.id)"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">Pregled</button></td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+    </div>
+    
+</div>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

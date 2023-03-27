@@ -1,0 +1,459 @@
+<h5 >Korisnik: {{korisnik.ime}} {{korisnik.prezime}}</h5>
+<button class="btn btn-outline-info"  (click)="logout()">Odjavi se</button>
+<hr>
+<div class="card">
+    <img src="{{knjiga.slikaKorice}}"  width="300px" height="480px" alt="{{knjiga.id}}" class="image">
+  
+    <div class="card-body">
+      <h3 class="card-title">{{knjiga.naziv}}</h3>
+      <i class="card-title">{{knjiga.autori}}</i>
+      <p class="card-text">Identifikator: {{knjiga.id}}</p>
+      <p class="card-text">Zanr/ovi: {{knjiga.zanrovi}}</p>
+      <p class="card-text">Izdavac: {{knjiga.izdavac}}</p>
+      <p class="card-text">Godina izdavanja: {{knjiga.godinaIzdavanja}}</p>
+      <p class="card-text">Jezik: {{knjiga.jezik}}</p>
+      <p class="card-text">Na stanju: {{knjiga.naStanju}}</p>
+      <p class="card-text">Prosecna ocena: {{this.prosecnaOcenaString}}</p>
+      <!--<button type="button" class="btn btn-outline-info" (click)="nazad()">Nazad</button>-->
+    </div>
+    <br>
+    <span [hidden]="porukaZaduziDa==''" style="color: green;">{{porukaZaduziDa}}</span>
+    <span [hidden]="porukaZaduziNe==''" style="color:red">{{porukaZaduziNe}}</span>
+    <button *ngIf="mozeSeZaduziti && korisnik.tip=='citalac'" class="btn btn-outline-info" (click)="zaduzi()">Zaduzi knjigu</button>
+    <br>
+    <button (click)="oceniKomentarisi(knjiga.id)" class="btn btn-dark">Oceni i komentariši</button>
+
+  </div>
+
+  <div *ngIf="oceniKomentarisiBoolean==true">
+    <i>{{oceniKomentarisiKnjiga.naziv}}</i>
+    <div class="kucica">
+        <h5>Oceni</h5>
+        <div>
+
+
+            <div>
+                <input type="radio" name="ocena" value="1" id="1" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="2" id="2" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="3" id="3" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="4" id="4" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="5" id="5" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="6" id="6" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="7" id="7" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="8" id="8" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="9" id="9" [(ngModel)]="ocenaK">
+                <input type="radio" name="ocena" value="10" id="10" [(ngModel)]="ocenaK">
+            </div>
+
+        </div>
+        <div>
+            <br>
+            <input type="radio" name="bezOcene" value="ne" [(ngModel)]="ocenitiBoolean">
+            <span>Bez ocene</span>
+
+            <br>
+            <input type="radio" name="bezOcene" value="da" [(ngModel)]="ocenitiBoolean">
+            <span>Pošalji ocenu</span>
+        </div>
+    </div>
+
+
+    <hr class="style5">
+    <div class="kucicaKom">
+        <h5>Komentariši</h5>
+        <textarea class="tekstKom" type="text" name="tekst" maxlength="1000"
+            [(ngModel)]="komentar"></textarea>
+        <div>
+            <input type="radio" name="bezKomentara" value="ne" [(ngModel)]="komentarisatiBoolean">
+            <label class="bezOcene">Bez komentara</label>
+            <br>
+            <input type="radio" name="bezKomentara" value="da" [(ngModel)]="komentarisatiBoolean">
+            <label class="bezOcene">Pošalji komentar</label>
+        </div>
+    </div>
+    <button (click)="dugme()" class=" btn btn-outline-info">Unesi ocenu i komentar</button>
+    <span>{{porukaOK}}</span>
+
+</div>
+
+
+<hr>
+  <div class="ocene" *ngIf="korisnik.tip=='citalac'">
+    <h4 style="color:chocolate">Ocene</h4>
+    <div *ngIf="sveOceneKnjige.length>0">
+        <table>
+            <tr *ngFor="let o of sveOceneKnjige">
+                <td>{{o.username}} &nbsp;&nbsp;&nbsp;</td>
+                <td *ngIf="o.ocena==10">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+
+                </td>
+                <td *ngIf="o.ocena==9">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>              
+                </td>
+                <td *ngIf="o.ocena==8">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </td>
+                <td *ngIf="o.ocena==7">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </td>
+                <td *ngIf="o.ocena==6">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </td>
+                <td *ngIf="o.ocena==5">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </td>
+                <td *ngIf="o.ocena==4">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </td>
+                <td *ngIf="o.ocena==3">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </td>
+                <td *ngIf="o.ocena==2">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </td>
+                <td *ngIf="o.ocena==1">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+
+<div *ngIf="sveOceneKnjige.length==0">Još nema ocena.</div>
+<hr>
+
+<div class="komentari">
+    <h4 style="color:chocolate">Komentari</h4>
+
+
+    <div *ngIf="sviKomentari.length>0">
+        <table class="tabelaKomentari">
+
+
+            <tr *ngFor="let k of sviKomentari">
+                <td>
+                    {{k.username}}
+                    <br>
+                    {{k.satiString}}:{{k.minutiString}} || {{k.danString}}.{{k.mesecString}}.{{k.godinaString}}.
+                    <div *ngIf="k.azurirano==true" style="color: chocolate;">
+                        Ažurirano:
+                        <br>
+                        {{k.satiAString}}:{{k.minutiAString}} ||
+                        {{k.danAString}}.{{k.mesecAString}}.{{k.godinaAString}}.
+                    </div>
+                </td>
+                <td *ngIf="this.korisnik.username && this.azurirajKomentarBoolean==false">
+                    {{k.tekst}}
+                    <div>
+                        <button *ngIf="this.korisnik.username==k.username" (click)="azurirajKomentar()"
+                            class="btn btn-outline-info">Ažuriraj komentar</button>
+                    </div>
+                </td>
+                <td *ngIf="this.korisnik.username && this.azurirajKomentarBoolean==true">
+                    <textarea *ngIf="this.korisnik.username==k.username" type="text" name="noviKomentar"
+                        [(ngModel)]="noviKomentar" class="zaInput" maxlength="1000">{{k.tekst}}</textarea>
+                    <div>
+                        <label>{{k.tekst}}</label>
+                    </div>
+                    <div *ngIf="this.korisnik.username==k.username">
+                        <button (click)="potvrdiAzuriranje(k.idKnjige)" class="btn btn-outline-success">Potvrdi</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div *ngIf="sviKomentari.length==0">Još nema komentara.</div>
+</div>
+
+
+
+  
+
+
+  <div *ngIf="this.korisnik.tip=='moderator' || this.korisnik.tip=='admin'" class="container">
+    <div class="row mb-3 mt-3"><h5 class="tabele" style="color:chocolate">Ažuriraj knjigu</h5> <hr></div>
+    <br>
+    <form>
+    <div>
+        <table class="tabelaIzmena">
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>naziv</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" class="form-control" name="izmenaNaziv" [(ngModel)]="izmenaNaziv">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="nazivBoolean" [(ngModel)]="izmenaNazivBoolean" value="da" id="nazivDa">
+                    <label for="nazivDa">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="nazivBoolean" [(ngModel)]="izmenaNazivBoolean" value="ne" id="nazivNe">
+                    <label for="nazivNe">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>autor</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" class="form-control" name="izmenaAutor" [(ngModel)]="izmenaAutor">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="autorBoolean" [(ngModel)]="izmenaAutorBoolean" value="da" id="nazivDaA">
+                    <label for="nazivDaA">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="autorBoolean" [(ngModel)]="izmenaAutorBoolean" value="ne" id="nazivNeA">
+                    <label for="nazivNeA">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>žanr</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" class="form-control" name="izmenaZanr" [(ngModel)]="izmenaZanr">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="zanrBoolean" [(ngModel)]="izmenaZanrBoolean" value="da" id="nazivDaZ">
+                    <label for="nazivDaZ">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="zanrBoolean" [(ngModel)]="izmenaZanrBoolean" value="ne" id="nazivNeZ">
+                    <label for="nazivNeZ">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>izdavač</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" name="izmenaIzdavac" class="form-control" [(ngModel)]="izmenaIzdavac">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="izdavacBoolean" [(ngModel)]="izmenaIzdavacBoolean" value="da"
+                        id="nazivDaI">
+                    <label for="nazivDaI">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="izdavacBoolean" [(ngModel)]="izmenaIzdavacBoolean" value="ne"
+                        id="nazivNeI">
+                    <label for="nazivNeI">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>godina izdanja</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" class="form-control" name="izmenaGodinaIzdanja" [(ngModel)]="izmenaGodinaIzdanja">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="godinaIzdanjaBoolean" [(ngModel)]="izmenaGodinaIzdanjaBoolean" value="da"
+                        id="nazivDaGI">
+                    <label for="nazivDaGI">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="godinaIzdanjaBoolean" [(ngModel)]="izmenaGodinaIzdanjaBoolean" value="ne"
+                        id="nazivNeGI">
+                    <label for="nazivNeGI">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>jezik</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text"  class="form-control" name="izmenaJezik" [(ngModel)]="izmenaJezik">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="jezikBoolean" [(ngModel)]="izmenaJezikBoolean" value="da" id="nazivDaJ">
+                    <label for="nazivDaJ">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="jezikBoolean" [(ngModel)]="izmenaJezikBoolean" value="ne" id="nazivNeJ">
+                    <label for="nazivNeJ">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>na stanju</span>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="text" name="izmenaNaStanju" class="form-control" [(ngModel)]="izmenaNaStanju">
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="naStanjuBoolean" [(ngModel)]="izmenaNaStanjuBoolean" value="da"
+                        id="nazivDaNS">
+                    <label for="nazivDaNS">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="naStanjuBoolean" [(ngModel)]="izmenaNaStanjuBoolean" value="ne"
+                        id="nazivNeNS">
+                    <label for="nazivNeNS">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="tabelaIzmena">
+                    <span>slika</span>
+                </td>
+                <td class="tabelaIzmena">
+                  <div class="col">
+                    <label for="izmenaSlike" class="btn btn-primary">Izaberi sliku</label>
+                    <input id="izmenaSlike" style="display:none" class="form-control" type="file" (change)="selectFile($event)" accept=".png, .jpg">
+                </div>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="slikaBoolean"  [(ngModel)]="izmenaSlikaBoolean" value="da" id="nazivDaS">
+                    <label for="nazivDaS">izmeni</label>
+                </td>
+                <td class="tabelaIzmena">
+                    <input type="radio" name="slikaBoolean" [(ngModel)]="izmenaSlikaBoolean" value="ne" id="nazivNeS">
+                    <label for="nazivNeS">bez izmene</label>
+                </td>
+            </tr>
+            <tr>
+                <div><img [src]="izmenaSlika" *ngIf="izmenaSlika" width="90" height="120"></div>
+                <td>
+                  <i>Trenutno izabrana slika (ili vec postojeca)</i>
+                </td>
+            </tr>
+
+        </table>
+        <hr>
+        <button (click)="azurirajKnjigu()" type="submit" class="btn btn-outline-info">Ažuriraj</button>
+        <br>
+        <span>{{porukaIzmena}}</span>
+        <br>
+        <br>
+        <button class="btn btn-outline-info" type="submit" (click)="azurirajStranicu()">Ažuriraj stranicu</button>
+        <br>
+        <br>
+
+    </div>
+  </form>
+
+
+  <div class="row mb-3 mt-3"><button class="tabele" style="color:chocolate" (click)="zahtevi()">Pregled zahteva za dodavanje knjige</button> <hr></div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

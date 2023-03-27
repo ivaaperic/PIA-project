@@ -1,0 +1,229 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-primary" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/profil">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="">Home</a>
+            </li>
+            <li>
+                  <a class="navbar-brand" href="/profil">
+                    <img src="{{korisnik.slikaUrl}}" alt="" width="30" height="40" class="d-inline-block align-text-top">
+                    Profil korisnika
+                  </a>
+               
+             
+            </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              MENU
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/moderator">Pocetna strana</a></li>
+                <li><a class="dropdown-item" href="/profil">Profil</a></li>
+                <li><a class="dropdown-item" href="/zahtevimoderator">Zahtevi za dodavanje knjige</a></li>
+                <li><a class="dropdown-item" href="/zahtevnovaknjiga">Dodavanje nove knjige</a></li>
+                <li><a class="dropdown-item" href="/pretraga">Pretraga</a></li>
+                <li><a class="dropdown-item" href="/azuriraj">Azuriraj profil</a></li>
+                
+              
+            </ul>
+          </li>
+          
+        </ul>
+        
+  
+        <form class="d-flex">
+            <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+          </form>
+          
+  
+      </div>
+    </div>
+  </nav>
+  <div class="container p-3">
+    <router-outlet></router-outlet>
+  </div> <!--ovo mozda ne treba-->
+  
+  
+
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col">
+            <h3>Zahtevi</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row mb-3" *ngIf="requests.length>0">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th>ID</th>
+                    <th>Naziv</th>
+                    <th>Autori</th>
+                    <th>Zanrovi</th>
+                    <th>Izdavac</th>
+                    <th>Godina izdavanja</th>
+                    <th>Jezik </th>
+                    <th>Poslao/la zahtev</th>
+                    <th>Status</th>
+                    <th>Slika </th>                    
+                    <th>Akcija </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let r of requests" class="text-center">
+                    <td>{{r.id}}</td>
+                    <td>{{r.naziv}}</td>
+                    <td>{{r.autori}}</td>
+                    <td>{{r.zanrovi}}</td>
+                    <td>{{r.izdavac}}</td>
+                    <td>{{r.godinaIzdavanja}}</td>
+                    <td>{{r.jezik}}</td>
+                    <td>{{r.osoba}}</td>
+                    <td>{{r.status}}</td>
+                    <td><img [src]="r.slikaKorice"  height="70px"  width="50px"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-2">
+                                <button class="btn-sm btn-success" (click)="updateStatus('prihvacena', r.id)">✓</button>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn-sm btn-danger" (click)="updateStatus('odbijena', r.id)">X</button>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <h3>Odbijene knjige</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row mb-3" *ngIf="odbijene.length>0">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th>ID</th>
+                    <th>Naziv</th>
+                    <th>Autori</th>
+                    <th>Zanrovi</th>
+                    <th>Izdavac</th>
+                    <th>Godina izdavanja</th>
+                    <th>Jezik </th>
+                    <th>Poslao/la zahtev</th>
+                    <th>Status</th>
+                    <th>Slika </th>
+                    <th>Akcija </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="text-center" *ngFor="let d of odbijene">
+                    <td>{{d.id}}</td>
+                    <td>{{d.naziv}}</td>
+                    <td>{{d.autori}}</td>
+                    <td>{{d.zanrovi}}</td>
+                    <td>{{d.izdavac}}</td>
+                    <td>{{d.godinaIzdavanja}}</td>
+                    <td>{{d.jezik}}</td>
+                    <td>{{d.osoba}}</td>
+                    <td>{{d.status}}</td>
+                    <td><img [src]="d.slikaKorice"  height="70px"  width="50px"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-2">
+                                <button class="btn-sm btn-success" (click)="updateStatus('prihvacena', d.id)">Prihvati</button>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col">
+            <h3>Prihvacene knjige</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row mb-3" *ngIf="prihvacene.length>0">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th>ID</th>
+                    <th>Naziv</th>
+                    <th>Autori</th>
+                    <th>Zanrovi</th>
+                    <th>Izdavac</th>
+                    <th>Godina izdavanja</th>
+                    <th>Jezik </th>
+                    <th>Poslao/la zahtev</th>
+                    <th>Status</th>
+                    <th>Slika </th>
+                    <th>Akcija </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let a of prihvacene" class="text-center">
+                    <td>{{a.id}}</td>
+                    <td>{{a.naziv}}</td>
+                    <td>{{a.autori}}</td>
+                    <td>{{a.zanrovi}}</td>
+                    <td>{{a.izdavac}}</td>
+                    <td>{{a.godinaIzdavanja}</td>
+                    <td>{{a.jezik}}</td>
+                    <td>{{a.osoba}}</td>
+                    <td>{{a.status}}</td>
+                    <td><img [src]="a.slikaKorice"  height="70px"  width="50px"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-2">
+                                <button class="btn-sm btn-danger" (click)="updateStatus('odbijena', a.id)">X</button>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

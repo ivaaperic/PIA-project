@@ -1,0 +1,253 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/adminrequests">Zahtevi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/sve-knjige">Sve knjige</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/adminpromenalozinke">Promeni lozinku</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Registruj
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" routerLink="/admindodajkorisnika">Korisnika</a></li>
+                <li><a class="dropdown-item" routerLink="/admindodajknjigu">Knjigu</a></li>
+              </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Azuriraj
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/svi-korisnici">Korisnika</a></li>
+              <li><a class="dropdown-item" routerLink="/sve-knjige">Knjigu</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<div class="container p-3">
+    <router-outlet></router-outlet>
+</div>
+
+
+
+<div class="container">
+    <div class="row mb-3 mt-3">
+        <h3>Izmena podataka o korisniku:</h3>
+        <hr>
+    </div>
+    <form>
+        <div class="row mb-3 gy-3">
+            <div class="col-lg-4">
+                Ime <br>
+                <input type="text" name="ime"  class="form-control" placeholder="Ime..." [(ngModel)]="ime">
+            </div>
+            <div class="col-lg-4">
+                Prezime <br>
+                <input type="text" name="prezime"  class="form-control" placeholder="Prezime..." [(ngModel)]="prezime">
+            </div>
+            <div class="col-lg-4">
+                Broj telefona <br>
+                <input type="text" name="telefon"  class="form-control" placeholder="Broj telefona..." [(ngModel)]="telefon">
+            </div>
+            <div class="col">
+                <br>
+                <button class="btn btn-dark" (click)="updateOwner()">Potvrdite</button>
+            </div>
+            <div class="col">         
+                <div class="alert alert-success text-center" [class.nodisplay]="statusPoruka == 0" role="alert">
+                    Uspeh!
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <div class="row mb-3 gy-3">
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col">
+                    <h3>Izmena korisnčkog imena: </h3>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" name="username"  class="form-control" placeholder="Korisničko ime..." [(ngModel)]="username">
+                </div>
+                <div class="col">
+                    <button class="btn btn-dark" (click)="updateUsername()">Potvrdite</button>
+                </div>
+                <div class="col">
+                    <div class="alert alert-success text-center" [class.nodisplay]="statusPorukaKorisnicko != 2" role="alert">
+                        {{porukaKorisnicko}}
+                    </div>
+                    <div class="alert alert-warning text-center" [class.nodisplay]="statusPorukaKorisnicko != 1" role="alert">
+                        {{porukaKorisnicko}}
+                    </div>
+                    <div class="alert alert-danger text-center" [class.nodisplay]="statusPorukaKorisnicko != 0" role="alert">
+                        {{porukaKorisnicko}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col">
+                    <h3>Izmena e-mail adrese: </h3>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" name="email"  class="form-control" placeholder="E-mail..." [(ngModel)]="email">
+                </div>
+                <div class="col">
+                    <button class="btn btn-dark" (click)="updateEmail()">Potvrdite</button>
+                </div>
+                <div class="col">
+                    <div class="alert alert-success text-center" [class.nodisplay]="statusPorukaEmail != 2" role="alert">
+                        {{porukaEmail}}
+                    </div>
+                    <div class="alert alert-warning text-center" [class.nodisplay]="statusPorukaEmail != 1" role="alert">
+                        {{porukaEmail}}
+                    </div>
+                    <div class="alert alert-danger text-center" [class.nodisplay]="statusPorukaEmail != 0" role="alert">
+                        {{porukaEmail}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <div class="row mb-3 mt-3">
+        <h3>Izmena lozinke:</h3>
+        <hr>
+    </div>
+    <form>
+        <div class="row mb-3 gy-3">
+            <div class="col-lg-6">
+                Nova lozinka <br>
+                <input type="password" name="password"  class="form-control" placeholder="Lozinka..." [(ngModel)]="passwordNova">
+            </div>
+            <div class="col-lg-6">
+                Potvrdite lozinku <br>
+                <input type="password" name="passwordAgain"  class="form-control" placeholder="Potvrdite lozinku..." [(ngModel)]="passwordAgain">
+            </div>
+        </div>
+        <div class="row mb-3 gy-3">
+            <div class="col-lg-6">
+                Stara lozinka <br>
+                <input type="password" name="passwordOld"  class="form-control" placeholder="Stara lozinka..."[(ngModel)]="passwordOld">
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <button class="btn btn-dark" (click)="updatePassword()">Potvrdite</button>
+                    </div>
+                    <div class="col">
+                        <div class="alert alert-danger text-center" [class.nodisplay]="statusPorukaLozinka != -1" role="alert">
+                            {{porukaLozinka}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row mb-3 mt-3">
+        <h3>Izmena podataka o adresi:</h3>
+        <hr>
+    </div>
+    <form>
+        
+        <div class="row mb-3 gy-3">
+            <div class="col-lg-4">
+                Ulica, broj i grad <br>
+                <input type="text" name="ulicaBrojGrad"  class="form-control" placeholder="Ulica..." [(ngModel)]="ulicaBrojGrad">
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col">
+                        <br>
+                    <button class="btn btn-dark" (click)="updateAdresu()">Potvrdite</button>
+                    </div>
+                    <div class="col">
+                        <div class="alert alert-success text-center" [class.nodisplay]="statusPorukaLokacija != 1" role="alert">
+                            Uspeh!
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</div>
+<hr>
+
+<div class="col">
+    <h3>Brisanje korisnika: </h3>
+    <hr>
+</div>
+
+<div class="col-lg-4">
+    <div class="row">
+        <div class="col">
+            <br>
+        <button class="btn btn-dark" (click)="obrisiKorisnika()">Obrisi korisnika</button>
+        </div>
+        <div class="col">
+            <div class="alert alert-success text-center" [class.nodisplay]="statusPorukaObrisi != 2" role="alert">
+                {{porukaObrisi}}
+            </div>
+            <div class="alert alert-warning text-center" [class.nodisplay]="statusPorukaObrisi != 1" role="alert">
+                {{porukaObrisi}}
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

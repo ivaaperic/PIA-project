@@ -1,0 +1,149 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light bg-primary" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/profil">{{korisnik.ime}} {{korisnik.prezime}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li>
+                  <a class="navbar-brand" href="/profil">
+                    <img src="{{korisnik.slikaUrl}}" alt="" width="30" height="40" class="d-inline-block align-text-top">
+                    Profil korisnika
+                  </a>
+               
+             
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="">Home</a>
+            </li>
+            
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              MENU
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/profil">Profil</a></li>
+                <li><a class="dropdown-item" href="/zahtevnovaknjiga">Zahtev za dodavanje nove knjige</a></li>
+
+                <li><a class="dropdown-item" href="/pretraga">Pretraga</a></li>
+                <li><a class="dropdown-item" href="/azuriraj">Azuriraj profil</a></li>
+
+              
+            </ul>
+          </li>
+          
+        </ul>
+
+        <form class="d-flex">
+            <button class="btn btn-light" type="submit" (click)="logout()">Izlogujte se</button>
+          </form>
+          
+
+      </div>
+    </div>
+  </nav>
+  <div class="container p-3">
+    <router-outlet></router-outlet>
+</div> <!--ovo mozda ne treba-->
+<div class="container w-50 p-5 my-5 border border-dark border-2 rounded-3">
+    <form>
+        <div class="row mb-3 text-center">
+            <h2>Forma za dodavanje knjige</h2>
+            <hr>
+        </div>
+        <div class="row mb-3 gy-3">
+
+            <div class="col-lg-6"> 
+                <input type="text" name="naziv" class="form-control" placeholder="Naziv..." [(ngModel)]="naziv">
+            </div>
+        </div>
+
+        <h5>Izaberi autora/autore:</h5>
+        <div>
+            <select class="form-select" multiple aria-label="multiple select example" name="autori"  [(ngModel)]="autori">
+                <option *ngFor="let n of sviAutori">{{n.autor}}</option>
+          </select>
+
+
+        </div>
+        <br>
+        <h5>Izaberi zanr/zanrove (maksimalno 3):</h5>
+        <div>
+            <select class="form-select" multiple aria-label="multiple select example" name="zanrovi"  [(ngModel)]="zanrovi">
+                <option *ngFor="let n of sviZanrovi">{{n.zanr}}</option>
+          </select>
+
+
+        </div>
+
+        <div class="row mb-3 mx-auto">
+            <input type="text" name="izdavac" class="form-control" placeholder="Izdavac..." [(ngModel)]="izdavac">
+        </div>
+        <div class="row mb-3 mx-auto">
+            <input type="text" name="godinaIzdavanja" class="form-control" placeholder="Godina izdavanja..." [(ngModel)]="godinaIzdavanja">
+        </div>
+        <div class="row mb-3 mx-auto">
+            <input type="text" name="jezik" class="form-control" placeholder="Jezik..." [(ngModel)]="jezik">
+        </div>
+        <!-- <div class="row mb-3 mx-auto">
+            <input type="number" name="dodajKolicinu" class="form-control" placeholder="Koliko knjiga dodajes..." [(ngModel)]="dodajKolicinu">
+        </div> -->
+        
+        <div class="row mb-3">
+            <div class="col">
+                <label for="slikaKorice" class="btn btn-dark">slika</label>
+                <input id="slikaKorice" style="display:none" class="form-control" type="file" (change)="selectFile($event)" accept=".png, .jpg">
+            </div>
+        </div>
+        <div class="row mx-auto text-center">
+            <div class="col" *ngIf="korisnik.tip=='citalac'">
+                <button class="btn btn-outline-info" (click)="dodajKnjigu()">Posalji zahtev za dodavanje</button>
+            </div>
+            <div class="col" *ngIf="korisnik.tip!='citalac'">
+                <button class="btn btn-outline-info" (click)="dodajKnjigu()">Dodaj knjigu</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container mb-3">
+    <div class="row">
+        <div class="col">            
+            <div class="alert alert-danger w-50 mx-auto text-center" [class.nodisplay]="porukaStatus!=0" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">            
+            <div class="alert alert-success w-50 mx-auto text-center" [class.nodisplay]="porukaStatus!=2" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+  <body class="d-flex flex-column">
+    <hr>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small> Kontakt telefon za sve informacije: &nbsp;&nbsp;&nbsp;
+          <a class="btn btn-outline-info" href="tel:+381648077841" style="padding:20px;">
+            <i class="bi bi-telephone-fill"></i> <span class="glyphicon glyphicon-earphone" style="padding-left:10px; padding-right:10px;"></span> +381648077841
+         </a>
+        </small>
+      </div>
+    </footer>
+  </body>

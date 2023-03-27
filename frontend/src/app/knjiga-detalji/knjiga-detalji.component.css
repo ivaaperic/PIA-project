@@ -1,0 +1,60 @@
+h3{
+    color:cornflowerblue;
+}
+i{
+    color:darkcyan
+}
+botton{
+    background-color: darkkhaki;
+    color:black
+}
+
+.nodisplay {
+    display:none;
+} 
+
+
+h2{
+    color:darkcyan
+}
+
+hr.style5 {
+	background-color: #fff;
+	border-top: 2px dashed #8c8b8b;
+}
+
+h5{
+    color:darkcyan
+}
+
+.nodisplay {
+    display: none;
+}
+
+.nazad {
+    background-color: navajowhite;
+    text-align: right;
+    padding: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    z-index: 10;
+}
+
+.nazad {
+    background-color: navajowhite;
+    text-align: right;
+    padding: 20px;
+}
+
+.tabele {
+    margin-left: 15px;
+}
+
+.tabelaIzmena {
+    padding: 0 15px;
+    margin-left: 30px;
+}
+
